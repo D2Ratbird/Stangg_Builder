@@ -1,0 +1,746 @@
+/* Base Container Styles */
+.filter-container {
+    background: var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Search and Filter Sections */
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.filter-search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--secondary-color);
+    border-radius: 8px;
+}
+
+/* Mana Symbol Styles */
+.mana-symbol {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: var(--secondary-color);
+    transition: all 0.2s ease;
+}
+
+.mana-symbol i {
+    font-size: 24px;
+}
+
+.mana-symbol.selected {
+    background: var(--accent-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.mana-symbol.selected[data-symbol="W"] { background: #ffecc6c5; }
+.mana-symbol.selected[data-symbol="U"] { background: #0e68ab; }
+.mana-symbol.selected[data-symbol="B"] { background: #150b1e; }
+.mana-symbol.selected[data-symbol="R"] { background: #d32029; }
+.mana-symbol.selected[data-symbol="G"] { background: #00733e; }
+
+.mana-symbol.colorless {
+    background: var(--secondary-color);
+}
+
+.mana-symbol.colorless:hover {
+    transform: scale(1.1);
+}
+
+.mana-symbol.colorless.selected {
+    background: #98979D;
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.mana-symbol.colorless i {
+    color: #666;
+}
+
+.mana-symbol.colorless.selected i {
+    color: #333;
+}
+
+/* Search Bar Styles */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.search-bar {
+    flex: 1;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--secondary-color);
+    color: var(--text-color);
+}
+
+#textSearch, #nameSearch {
+    background-color: white;
+    color: #333;
+}
+
+#textSearch:focus, #nameSearch:focus {
+    outline: 2px solid var(--accent-color);
+}
+
+/* Toggle Switch Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ff4444;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #44ff44;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Search Toggle Labels */
+.search-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-toggle::before {
+    content: "Either";
+    color: var(--text-color);
+}
+
+.search-toggle::after {
+    content: "Both";
+    color: var(--text-color);
+}
+
+/* Type Dropdown Styles */
+.type-dropdown-section {
+    margin: 10px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+.dropdown-header {
+    padding: 8px;
+    background: var(--secondary-color);
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+}
+
+.dropdown-content {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px;
+}
+
+/* Type Search Styles */
+.type-search-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.type-search-container {
+    position: relative;
+    width: 200px;
+    order: 0;
+    margin-right: auto;
+    flex: 0 0 200px;
+}
+
+.type-search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid var(--border-color);
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 2px;
+}
+
+/* Type Tags and Options */
+.selected-types-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.type-tag {
+    order: 1;
+    background: var(--accent-color);
+    padding: 4px 8px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.type-option {
+    padding: 8px 12px;
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 4px;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    text-align: left;
+}
+
+.type-option:hover {
+    background-color: #f0f0f0;
+}
+
+.type-option.selected {
+    background-color: #e0e0e0;
+}
+
+.remove-tag {
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0 4px;
+}
+
+.remove-tag:hover {
+    color: #ff4444;
+}
+
+#type-search {
+    flex-grow: 1;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+.capsule-button, .search-button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.search-button:hover {
+    background: #45a049;
+}
+
+/* Capsule Styles */
+.type-capsule {
+    border: 2px solid var(--accent-color);
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.capsule-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+.capsule-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.capsule-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-height: 0;
+    width: 100%;
+}
+
+/* Type Dropdowns Section */
+.type-dropdowns {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    clear: both;
+    margin-top: 20px;
+}
+
+.type-dropdowns-header {
+    padding: 10px;
+    background: var(--secondary-color);
+    cursor: pointer;
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    clear: both;
+}
+
+.type-dropdowns-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 15px;
+}
+
+.dropdown-section {
+    flex: 1 1 200px;
+    min-width: 200px;
+    max-width: 300px;
+    margin: 10px;
+}
+
+.dropdown-section:last-child {
+    border-bottom: none;
+}
+
+/* Critical Type Filter Dropdown Styles */
+.dropdown-content {
+    display: flex !important;
+    flex-direction: column;
+    gap: 8px !important;
+    width: 200px;
+    padding: 8px 0;
+}
+
+/* Results Panel Styles */
+.results-filter-panel {
+    padding: 15px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.results-filter-panel .dropdown-content {
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: none !important; /* Override the type filter's !important */
+    top: 100%;
+    left: 0;
+}
+
+.results-filter-panel .dropdown-content.show {
+    display: block !important; /* Override the type filter's !important */
+}
+
+.category-dropdowns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.category-dropdown {
+    position: relative;
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.dropdown-button {
+    padding: 8px 16px;
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sorting-controls {
+    flex: 0 0 auto;
+}
+
+.sorting-controls select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.sorting-controls button {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: white;
+    cursor: pointer;
+}
+
+.filter-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    color: #333;
+}
+
+.filter-item label {
+    cursor: pointer;
+    flex: 1;
+}
+
+.filter-item input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* Mana Filter*/
+.filter-search-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.filter-search-button:hover {
+    background-color: #45a049;
+}
+
+.filter-search-button:active {
+    background-color: #3d8b40;
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1100ffdf;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle-label {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.toggle-label-left, .toggle-label-right {
+    font-size: 14px;
+}
+
+.toggle-label-left {
+    color: #ffffff;
+}
+
+.toggle-label-right {
+    color: #ffffff;
+}
+
+/* exact mana cost section styles */
+#exactManaCost {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid var(--border-color);
+}
+
+.exact-mana-input-section {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.generic-mana-input {
+    width: 60px;
+    height: 30px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+.mana-symbol-groups {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mana-group {
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.mana-group-title {
+    font-size: 0.8em;
+    color: var(--text-color-secondary);
+    margin-bottom: 5px;
+}
+
+.selected-mana-costs {
+    min-height: 40px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mana-cost-tag {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 8px;
+    background-color: #2a2a2a;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.mana-cost-tag:hover {
+    background: var(--accent-color);
+}
+
+.remove-cost {
+    color: var(--text-color-secondary);
+    font-weight: bold;
+    padding: 0 4px;
+}
+
+.remove-cost:hover {
+    color: var(--text-color);
+}
+
+.exact-cost-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.cmc-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cmc-input {
+    width: 70px;
+    height: 30px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+#exactManaCost .toggle-container {
+    margin-right: 15px;
+}
+
+/* Basic colored mana symbols */
+#exactManaCost .mana-symbol[data-symbol="W"] i { color: #F8F6D8; }
+#exactManaCost .mana-symbol[data-symbol="U"] i { color: #C1D7E9; }
+#exactManaCost .mana-symbol[data-symbol="B"] i { color: #A69F9D; }
+#exactManaCost .mana-symbol[data-symbol="R"] i { color: #E49977; }
+#exactManaCost .mana-symbol[data-symbol="G"] i { color: #A3C095; }
+
+/* Phyrexian mana symbols */
+#exactManaCost .mana-symbol[data-symbol="W/P"] i { color: #D8D6B8; }
+#exactManaCost .mana-symbol[data-symbol="U/P"] i { color: #A1B7C9; }
+#exactManaCost .mana-symbol[data-symbol="B/P"] i { color: #867F7D; }
+#exactManaCost .mana-symbol[data-symbol="R/P"] i { color: #C47957; }
+#exactManaCost .mana-symbol[data-symbol="G/P"] i { color: #83A075; }
+
+#exactManaCost .mana-symbol {
+    background-color: #2a2a2a;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+/* Color classes for mana tags */
+.mana-cost-tag i.ms-w-color { color: #F8F6D8; }
+.mana-cost-tag i.ms-u-color { color: #C1D7E9; }
+.mana-cost-tag i.ms-b-color { color: #A69F9D; }
+.mana-cost-tag i.ms-r-color { color: #E49977; }
+.mana-cost-tag i.ms-g-color { color: #A3C095; }
+
+/* Price Filter*/
+.price-range-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.price-input {
+    width: 80px;
+    height: 30px;
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--background-color);
+    color: var(--text-color);
+}
+
+#priceSearchButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+#priceSearchButton:hover {
+    background-color: #45a049;
+}
+
+/*all filter search*/
+.combined-search-button {
+    position: fixed;
+    bottom: 30px;
+    right: 90px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+
+}
+
+.combined-search-button:hover {
+    background-color: #45a049;
+}

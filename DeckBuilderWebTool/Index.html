@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MTG Card Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="Search/css/main.css">
+    <link rel="stylesheet" href="Search/css/filters.css">
+    <link rel="stylesheet" href="Search/css/results.css">
+    <link rel="stylesheet" href="Search/css/modal.css">
+    <link rel="stylesheet" href="Search/css/views.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css">
+    <link rel="stylesheet" href="Builder/css/deckBuilder.css">
+</head>
+<body>
+    <div class="main-search-container">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search cards...">
+            <button id="directSearch" class="search-button">Search</button>
+            <div id="searchLoading" style="display: none;">Loading...</div>
+        </div>
+        <button id="openFilters" class="search-button">Open Filters</button>
+    </div>
+
+    <div id="resultsOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Search Results</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <button id="viewToggle">Switch to list view</button>
+            <div class="results-filter-panel-container"></div>
+            <div id="searchResults" class="grid-view"></div>
+        </div>
+    </div>
+
+    <div id="filterOverlay" class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Filter Cards</h2>
+                <button class="close-button">&times;</button>
+            </div>
+            <div class="filter-container">
+                <div class="search-bar">
+                    <input type="text" 
+                           id="nameSearch" 
+                           placeholder="Search card names..." 
+                           autocomplete="on"
+                           list="nameSearchHistory">
+                    <datalist id="nameSearchHistory"></datalist>
+                </div>
+                
+                <div class="search-toggle">
+                    <label class="switch">
+                        <input type="checkbox" id="searchMode">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" 
+                           id="textSearch" 
+                           placeholder="Search card text..." 
+                           autocomplete="on"
+                           list="textSearchHistory">
+                    <datalist id="textSearchHistory"></datalist>
+                </div>
+            
+                <button id="filterSearch" class="search-button">Search</button>
+                <div id="loadingIndicator" style="display: none;">Searching...</div>
+                <div class="filter-section">
+                    <h3>Type</h3>
+                    <div class="filter-group" id="typeFilter"></div>
+                </div>
+                <div class="filter-section">
+                    <h3>Mana Cost</h3>
+                    <div class="filter-group" id="manaCostFilter"></div>
+                </div>
+                <div class="filter-section">
+                    <h3>Color Identity</h3>
+                    <div class="filter-group" id="colorIdentityFilter"></div>
+                    <button id="manaSearchButton" class="filter-search-button">
+                        Search by Mana
+                    </button>
+                </div>
+                <div class="filter-section">
+                    <h3>Price Range</h3>
+                    <div class="price-range-inputs">
+                        <input type="number" class="price-input" min="0" step="0.01" placeholder="Min $">
+                        <span>to</span>
+                        <input type="number" class="price-input" min="0" step="0.01" placeholder="Max $">
+                    </div>
+                    <button id="priceSearchButton" class="filter-button">Search by Price</button>
+                </div>
+            </div>
+        </div>
+        <button id="combinedSearchButton" class="combined-search-button">
+            Search All Filters
+        </button>
+    </div>
+
+    <div id="cardPreview" class="preview-overlay">
+        <button class="close-preview">&times;</button>
+        <div class="preview-content">
+            <div class="card-image-container">
+                <img src="" alt="Card Preview">
+                <button class="flip-card-button" style="display: none;">↻ Flip</button>
+                <button class="show-variants">Show Variants</button>
+            </div>
+            <div class="card-details">
+                <h2 class="card-name"></h2>
+                <div class="mana-info"></div>
+                <div class="oracle-text"></div>
+                <div class="price-info"></div>
+                <div class="legalities-container"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="newDeckModal" class="modal">
+        <div class="modal-content">
+            <h2>Create New Deck</h2>
+            <form id="newDeckForm">
+                <div class="form-group">
+                    <label for="deckName">Deck Name*</label>
+                    <input type="text" id="deckName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deckFormat">Format</label>
+                    <select id="deckFormat">
+                        <option value="">Select Format...</option>
+                        <option value="standard">Standard</option>
+                        <option value="modern">Modern</option>
+                        <option value="commander">Commander</option>
+                        <!-- We'll populate this dynamically later -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Colors</label>
+                    <div id="colorSelector" class="color-options">
+                        <!-- Color checkboxes will go here -->
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="deckNotes">Notes</label>
+                    <textarea id="deckNotes"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit">Create Deck</button>
+                    <button type="button" class="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="deck-browser">
+        <div class="deck-tabs">
+            <div id="newDeckTab" class="deck-tab new-deck-tab">
+                <span class="tab-icon">+</span>
+                New Deck
+            </div>
+            <!-- Open deck tabs will be added here dynamically -->
+        </div>
+        <div class="deck-workspace">
+            <!-- Deck content will be displayed here -->
+        </div>
+    </div>
+
+    <script src="Search/js/utils.js"></script>
+    <script src="Search/js/display.js"></script>
+    <script src="Search/js/filters/typeFilter.js"></script>
+    <script src="Search/js/filters/manaFilter.js"></script>    
+    <script src="Search/js/filters/filterManager.js"></script>
+    <script src="Search/js/search.js"></script>
+    <script src="Search/js/resultsManager.js"></script>
+    <script src="Search/js/main.js"></script>
+    <script src="Search/js/searchManager.js"></script>
+    <script src="Search/js/filters/priceFilter.js"></script>
+    <script src="Search/js/filters/tagFilter.js"></script>
+    <script src="Builder/js/deckBuilder.js"></script>
+</body>
+</html>
+
+
